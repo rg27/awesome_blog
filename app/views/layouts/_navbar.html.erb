@@ -13,12 +13,18 @@
              <li class="nav-item">
                  <%= link_to "About", about_path, class:"nav-link" %>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Signup</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Login</a>
-            </li>
+            <%if logged_in? %>
+                <li class="nav-item">
+                    <%= link_to "Rey Mar",  class:"nav-link mt-4" %>
+                </li>
+            <%else%>
+                <li class="nav-item">
+                    <%= link_to "Signup", signup_path, class:"nav-link" %>
+                </li>
+                <li class="nav-item">
+                    <%= link_to "Login", login_path, class:"nav-link" %>
+                </li>
+            <% end %>
         </ul>
     </div>
 </div>
