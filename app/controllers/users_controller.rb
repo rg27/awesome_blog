@@ -1,4 +1,6 @@
 class UsersController < ApplicationController
+	before_action :logged_in_user, except: [:new, :create]
+	before_action :correct_user, only: [:edit, :update]
 	def new
 		@user = User.new
 	end
@@ -13,8 +15,35 @@ class UsersController < ApplicationController
 		end
 	end
 
+	def edit
+		@user = User.find(params[:id])
+	end
+
+	def update
+    @user = User.find(params[:id])
+    if @user.update(user_params)
+			flash[:success] = "Successfully Updated Profile."
+      redirect_to root_url
+    else
+      render 'edit'
+    end
+  end
+	
+	def show
+		@user = User.find(params[:id])
+	end
+	
+
 	private
 		def user_params
 			params.require(:user).permit(:name, :email, :password, :password_confirmation)
+		end
+
+		def correct_user
+			user = User.find(params[:id])
+			if user != current_user
+				flash[:danger] = "You are not authorized"
+				redirect_to root_url
+			end
 		end
 end

@@ -7,5 +7,5 @@ class User < ApplicationRecord
 																		format: { with: EMAIL_REGEX },
 																		uniqueness: { case_sensitive: false}
 	has_secure_password #Equivalent of password and password confirmation
-	validates :password, presence: true, length: { minimum: 6 } #It shoud be place after "has_secured_password since it is depending on Bcrypt"
+	validates :password, presence: true, length: { minimum: 6 }, allow_nil:true #It shoud be place after "has_secured_password since it is depending on Bcrypt"
 end

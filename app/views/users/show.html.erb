@@ -1,0 +1,26 @@
+<% provide(:title, "Show")%>
+<div class="row">
+	<div class="card mt-4 mr-auto col-3">
+		<div class="card-header">
+			User Information
+		</div>
+		<div class="card-body">
+			<div class="text-center">
+				<%= profile_image(current_user, "profile-big")%>
+			</div>
+			<div class="mx-auto text-center">
+				<h5 class="card-title"><%= @user.name%></h5>
+				<p class="card-text"> <%= @user.email%></p>
+			</div>
+		</div>
+	</div>
+
+	<div class="card mt-4 col-8 ml-auto">
+		<div class="card-header">
+			Activity Feeds
+		</div>
+		<div class="">
+		</div>
+	</div>
+</div>
+
