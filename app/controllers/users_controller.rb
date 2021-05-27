@@ -1,6 +1,11 @@
 class UsersController < ApplicationController
 	before_action :logged_in_user, except: [:new, :create]
 	before_action :correct_user, only: [:edit, :update]
+
+	def index
+		@users = User.paginate(page: params[:page], per_page: 10).order(created_at: :desc)
+	end
+
 	def new
 		@user = User.new
 	end
@@ -22,8 +27,8 @@ class UsersController < ApplicationController
 	def update
     @user = User.find(params[:id])
     if @user.update(user_params)
-			flash[:success] = "Successfully Updated Profile."
-      redirect_to root_url
+		flash[:success] = "Successfully Updated Profile."
+    redirect_to root_url
     else
       render 'edit'
     end
@@ -31,8 +36,9 @@ class UsersController < ApplicationController
 	
 	def show
 		@user = User.find(params[:id])
+		@post = current_user.posts.build
+		@posts = @user.posts.paginate(page: params[:page], per_page: 10).order(created_at: :desc)
 	end
-	
 
 	private
 		def user_params

@@ -8,4 +8,5 @@ class User < ApplicationRecord
 																		uniqueness: { case_sensitive: false}
 	has_secure_password #Equivalent of password and password confirmation
 	validates :password, presence: true, length: { minimum: 6 }, allow_nil:true #It shoud be place after "has_secured_password since it is depending on Bcrypt"
+	has_many :posts
 end
