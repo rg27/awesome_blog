@@ -14,12 +14,12 @@
 					<p class="card-text"> <%= @user.email%></p>
 				</div>
 			</div>
-			<%if @user == current_user%>
-				<div class="card-footer">
-					<%= render "posts/form"%>
-				</div>
-			<%end%>
 		</div>
+		
+		<%= button_to "Unfollow","#"%> 
+		<%if current_user%>
+			<%= button_to "Follow", relationships_path, params: {followed_id: @user.id} %> 
+		<%end%>
 	</div>
 
 	<div class="col-8">
@@ -27,13 +27,14 @@
 			<div class="card-header">
 				Activity Feeds
 			</div>
-				<% @posts.each do |u| %>
-					<div class="media mt-4 ml-4">
-						<%= profile_image(@user, "profile-big", )%>
-						<div class="media-body ml-2">
+				<% @user.posts.each do |u| %>
+					<div class="media mt-4 p-lg-2">
+						<%= profile_image(@user, "profile-big" )%>
+						<div class="media-body ml-2 mt-2">
 							<h4><%= u.user.email%> </h4>
 							<p><%= u.content%> </p>
 						</div>
+						<%= link_to "Delete", post_path(u.id), method: :delete, class:"btn btn-danger", data: {confirm:"Are you sure you want to delete?"}%>
 					</div>
 				<%end%>
 			</div>

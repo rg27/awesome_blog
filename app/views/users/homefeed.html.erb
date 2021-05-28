@@ -1,0 +1,42 @@
+<% provide(:title, "Homefeed")%>
+<div class="row">
+	<div class="col-4">
+		<div class="card mt-4 mr-auto">
+			<div class="card-header">
+				User Information
+			</div>
+			<div class="card-body">
+				<div class="text-center">
+					<%= profile_image(current_user, "profile-big")%>
+				</div>
+				<div class="mx-auto text-center">
+					<h5 class="card-title"><%= current_user.name%></h5>
+					<p class="card-text"> <%= current_user.email%></p>
+				</div>
+			</div>
+            <div class="card-footer">
+                <%= render "posts/form"%>
+            </div>
+		</div>
+	</div>
+
+    <div class="col-8">
+		<div class="card mt-4 ml-auto">
+			<div class="card-header">
+				Activity Feeds
+			</div>
+				<% current_user.posts.each do |u| %>
+					<div class="media mt-4 p-lg-2">
+						<%= profile_image(current_user, "profile-big" )%>
+						<div class="media-body ml-2 mt-2">
+							<h4><%= u.user.email%> </h4>
+							<p><%= u.content%> </p>
+						</div>
+						<%= link_to "Delete", post_path(u.id), method: :delete, class:"btn btn-danger", data: {confirm:"Are you sure you want to delete?"}%>
+					</div>
+				<%end%>
+			</div>
+		</div>
+	</div>
+</div>
+
