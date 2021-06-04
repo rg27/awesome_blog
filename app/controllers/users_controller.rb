@@ -25,18 +25,17 @@ class UsersController < ApplicationController
 	end
 
 	def update
-    @user = User.find(params[:id])
-    if @user.update(user_params)
-		flash[:success] = "Successfully Updated Profile."
-    redirect_to root_url
-    else
-      render 'edit'
+		@user = User.find(params[:id])
+		if @user.update(user_params)
+			flash[:success] = "Successfully Updated Profile."
+			redirect_to root_url
+		else
+			render 'edit'
+		end
     end
-  end
 	
 	def show
 		@user = User.find(params[:id])
-		# @post = current_user.posts.build
 		@posts = @user.posts.paginate(page: params[:page], per_page: 10).order(created_at: :desc)
 	end
 
@@ -53,3 +52,4 @@ class UsersController < ApplicationController
 			end
 		end
 end
+

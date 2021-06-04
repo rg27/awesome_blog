@@ -1,7 +1,7 @@
 <% provide(:title, "Show")%>
 <div class="row">
 	<div class="col-4">
-		<div class="card mt-4 mr-auto">
+		<div class="mt-4 mr-auto card">
 			<div class="card-header">
 				User Information
 			</div>
@@ -15,28 +15,32 @@
 				</div>
 			</div>
 		</div>
-		
-		<%= button_to "Unfollow","#"%> 
-		<%if current_user%>
-			<%= button_to "Follow", relationships_path, params: {followed_id: @user.id} %> 
+
+		<%if current_user.following?(@user)%>
+		<%= button_to "Unfollow", relationship_path(@user.id), method: :delete, params: {followed_id: @user.id} %> 
+		<%else%>
+		<%= button_to "Follow", relationships_path, params: {followed_id: @user.id} %> 
 		<%end%>
 	</div>
 
 	<div class="col-8">
-		<div class="card mt-4 ml-auto">
+		<div class="mt-4 ml-auto card">
 			<div class="card-header">
 				Activity Feeds
 			</div>
-				<% @user.posts.each do |u| %>
-					<div class="media mt-4 p-lg-2">
+				<% @posts.each do |u| %>
+					<div class="mt-4 media p-lg-2">
 						<%= profile_image(@user, "profile-big" )%>
-						<div class="media-body ml-2 mt-2">
-							<h4><%= u.user.email%> </h4>
+						<div class="mt-2 ml-2 media-body">
+							<h4><%= u.user.email%></h4>
 							<p><%= u.content%> </p>
 						</div>
 						<%= link_to "Delete", post_path(u.id), method: :delete, class:"btn btn-danger", data: {confirm:"Are you sure you want to delete?"}%>
 					</div>
 				<%end%>
+			</div>
+			<div class="mt-4 pagination justify-content-center">
+				<%= will_paginate @posts%>
 			</div>
 		</div>
 	</div>

@@ -1,6 +1,5 @@
 Rails.application.routes.draw do
   root 'pages#home'
-  # resources :pages
   get '/about', to: 'pages#about'
   get '/signup', to: 'users#new'
   resources :users
