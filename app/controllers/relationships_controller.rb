@@ -1,18 +1,16 @@
 class RelationshipsController < ApplicationController
 	#when follow a user
 	def create
-		#need follower_id and followed_id
-		Relationship.create(
-			follower_id: current_user.id,
-			followed_id: params[:followed_id]
-		)
-		#	redirect_back
+		user = User.find(params[:id]).follower
+		current_user.follow(user)
+		flash[:succcess] = "Successfully followed #(user.name)"
 		redirect_back(fallback_location: request.referer)
 	end
 
 	def destroy
-		Relationship.find_by(follower_id: current_user.id,
-			followed_id: params[:followed_id]).destroy
+		user = Relationship.find(params[:id]).followed
+		current_user.unfollow(user)
+		flash[:succcess] = "Successfully unfollowed #(user.name)"
 		redirect_back(fallback_location: request.referer)
 	end
 end
