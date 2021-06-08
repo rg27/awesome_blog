@@ -27,7 +27,6 @@ class User < ApplicationRecord
 
 	def following?(other_user)
 		Relationship.find_by_followed_id(other_user.id)
-		
 	end
 	
 end

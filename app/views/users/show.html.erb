@@ -12,11 +12,13 @@
 				<div class="mx-auto text-center">
 					<h5 class="card-title"><%= @user.name%></h5>
 					<p class="card-text"> <%= @user.email%></p>
-					<div class="col-6">
-						<%= link_to "#{@user.following.count} followings", "#"%>
-					</div>
-					<div class="col-6">
-						<%= link_to "#{@user.followers.count} followers", "#"%>
+					<div class="row">
+						<div class="col-6">
+							<%= link_to "#{@user.following.count} followings", "#"%>
+						</div>
+						<div class="col-6">
+							<%= link_to "#{@user.followers.count} followers", "#"%>
+						</div>
 					</div>
 					<%= render 'follow_form' %>
 				</div>
