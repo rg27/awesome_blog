@@ -1,0 +1,10 @@
+<% provide(:title,"Followers")%>
+<h1 class="mt-4 text-center">All Followers</h1>
+ <div class="row">
+    <!-- will auto find or render the _user.html.erb -->
+    <%= render @users%> 
+</div>
+
+<div class="mt-4 pagination justify-content-center">
+    <%= will_paginate @users%>
+</div>

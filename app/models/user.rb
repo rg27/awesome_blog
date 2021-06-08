@@ -28,5 +28,9 @@ class User < ApplicationRecord
 	def following?(other_user)
 		Relationship.find_by_followed_id(other_user.id)
 	end
-	
+
+	#will handle or to fetch followings posts/Return user feeds
+	def feed
+		Post.where("user_id IN (?) OR user_id = ?", following.ids, id)
+	end
 end

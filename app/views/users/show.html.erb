@@ -14,15 +14,14 @@
 					<p class="card-text"> <%= @user.email%></p>
 					<div class="row">
 						<div class="col-6">
-							<%= link_to "#{@user.following.count} followings", "#"%>
+							<%= link_to "#{@user.following.count} followings", following_user_path(@user)%>
 						</div>
 						<div class="col-6">
-							<%= link_to "#{@user.followers.count} followers", "#"%>
+							<%= link_to "#{@user.followers.count} followers",  followers_user_path(@user)%>
 						</div>
 					</div>
-					<%= render 'follow_form' %>
+					<div class="mt-2"><%= render 'follow_form' %></div>
 				</div>
-			
 			</div>
 		</div>
 	</div>

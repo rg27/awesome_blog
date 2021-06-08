@@ -39,6 +39,16 @@ class UsersController < ApplicationController
 		@posts = @user.posts.paginate(page: params[:page], per_page: 10).order(created_at: :desc)
 	end
 
+	def following
+		@user = User.find(params[:id])
+		@users = @user.following.paginate(page: params[:page], per_page: 10).order(created_at: :desc)
+	end
+
+	def followers
+		@user = User.find(params[:id])
+		@users = @user.followers.paginate(page: params[:page], per_page: 10).order(created_at: :desc)
+	end
+
 	private
 		def user_params
 			params.require(:user).permit(:name, :email, :password, :password_confirmation)

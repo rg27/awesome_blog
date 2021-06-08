@@ -2,7 +2,13 @@ Rails.application.routes.draw do
   root 'pages#home'
   get '/about', to: 'pages#about'
   get '/signup', to: 'users#new'
-  resources :users
+
+  resources :users do
+    member do
+      get :following, :followers
+    end
+  end
+
   root 'users#homefeed'
   resources :posts, only: [:create, :destroy]
   get '/login', to: 'sessions#new'
