@@ -27,25 +27,24 @@
 			</div>
 				<% @posts.each do |u| %>
 					<div class="mt-4 media p-lg-2">
-						<%= profile_image(current_user, "profile-big" )%>
+						<%= profile_image(current_user, "profile-feed" )%>
 						<div class="mt-2 ml-2 media-body">
-							<h4><%= u.user.email%> </h4>
+							<h5><%= u.user.email%> </h5>
+							<%= image_tag(u.image, style:'width:20%; height:auto')  if u.image.attached?%>
 							<p><%= u.content%> </p>
 							<small class="text-muted">Posted <%= time_ago_in_words(u.created_at)%> </small>
-						</div>
-						<% if current_user == u.user %>
-							<%= link_to post_path(u.id), method: :delete,
-								data: {confirm:"Are you sure"},
-								class: "float-right" do %>
-								Delete
+							<% if current_user == u.user %>
+								<%= link_to post_path(u.id), method: :delete,
+									data: {confirm:"Are you sure"},
+									class: "float-right btn btn-outline-danger" do %>
+									Delete
+								<%end%>
 							<%end%>
-						<%end%>
-						
+						</div>
+					
 					</div>
 					<hr class="mt-2 mb-2"/>
 				<%end%>
-
-				
 			</div>
 			<div class="mt-4 pagination justify-content-center">
 				<%= will_paginate @posts%>

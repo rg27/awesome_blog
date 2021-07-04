@@ -13,3 +13,10 @@ development:
 test:
   <<: *default
   database: awesome_blog_test
+
+#database.yml
+production:
+    <<: *default
+    adapter: postgresql
+    encoding: unicode
+    pool: 5

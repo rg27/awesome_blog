@@ -32,7 +32,7 @@ class UsersController < ApplicationController
 		else
 			render 'edit'
 		end
-    end
+  end
 	
 	def show
 		@user = User.find(params[:id])
